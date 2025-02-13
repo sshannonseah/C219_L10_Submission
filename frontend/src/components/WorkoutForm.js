@@ -22,14 +22,16 @@ const WorkoutForm = () => {
 
     const workout = {title, load, reps}
 
-    const response = await fetch('/api/workouts', {
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/api/workouts`, {
       method: 'POST',
       body: JSON.stringify(workout),
       headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${user.token}`
+        "Content-Type": 'application/json',
+        Authorization: `Bearer ${user.token}`
       }
-    })
+    });
+
+
     const json = await response.json()
 
     if (!response.ok) {
@@ -50,7 +52,7 @@ const WorkoutForm = () => {
     <form className="create" onSubmit={handleSubmit}>
       <h3>Add a New Workout</h3>
 
-      <label>Excersize Title:</label>
+      <label>Exercise Title:</label>
       <input 
         type="text"
         onChange={(e) => setTitle(e.target.value)}
